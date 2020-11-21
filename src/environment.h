@@ -1,10 +1,3 @@
-/*
- * environment.h
- *   created on: April 24, 2013
- * last updated: June 13, 2013
- *       author: liushujia
- */
-
 #ifndef __ENVIRONMENT__
 #define __ENVIRONMENT__
 
@@ -34,55 +27,56 @@
 #include <string.h>
 #include <time.h>
 
-class TEnvironment{
+class TEnvironment
+{
 public:
-	TEnvironment(); 
-	~TEnvironment();
+    TEnvironment();
+    ~TEnvironment();
 
-	void define();						// 初始化
-	void define_for_restart(); //init for restart
-	void doIt();						// GA主程序
-	void init();						// GA初始化
-	bool terminationCondition();		// 退出条件          
-	void setAverageBest();				// 计算种群平均TSP长度,种群最优TSP长度 and global best        
+    void define();   /* Define the variables */
+    void doIt();   /* Main procedure of the GA */
+    void init();   /* Initialization of the GA */
+    bool terminationCondition(); /* Decide whether to proceed to next stage (or treminate the GA) */
+    void setAverageBest();       /* Compute average and best tour lengths of the population */
 
-	void initPop();						// 初始化种群
-	void selectForMating();				// 选择父本与母本                
-	void generateKids( int s );			// 产生并选择子代            
-	void getEdgeFreq();					// 计算种群中每条边的频率                    
+    void initPop();        /* Create an initial population */
+    void selectForMating();    /* Determine a set of pairs of parents at each generation */
+    void generateKids(int s);  /* Generate offspring solutions from a selected pair of parents. Selection for survival is also performed here. */
+    void getEdgeFreq();        /* Compute the frequency of the edges of the population */
 
-	void printOn();				// 输出结果
-	void writeBest();					// 输出最优TSP路径
+    void printOn();  /* Display and write summary of results */
+    void writeBest(); /* Write the best tour */
 
-	TEvaluator* fEvaluator;				// 边距离
-	TCross* tCross;						// 边集合交叉
-	TKopt* tKopt;						// 局部搜索(2-opt neighborhood)
-	char *fFileNameTSP;					// TSP文件名
-	int optimum;                        // optimum cost
-	int tmax;							// max runtime
+    TEvaluator *fEvaluator; /* Distance of the edges */
+    TCross *tCross;         /* Eede assembly crossover */
+    TKopt *tKopt;           /* Local search with the 2-opt neighborhood */
+    char *fFileNameTSP;     /* File name of an TSP instance */
+    int optimum;            /* best known optimum cost */
+    int tmax;               /* maximum running time in seconds*/
+    bool terminate;         /* if terminate immediately */
 
-	int Npop;							// 种群数量                   
-	int Nch;							// 每个父本(母本)产生的子代数量                      
-	TIndi* tCurPop;						// 当前种群成员
-	TIndi tBest;						// 当前种群最优解
-	int fCurNumOfGen;					// 当前种群代数
-	long int fAccumurateNumCh;			// 子代累计数目             
+    int Npop; /* Number of population members (N_pop in the paper) */
+    int Nch;  /* Number of offspring solutions (N_ch in the paper) */
+    TIndi *tCurPop; /* Current population members */
+    TIndi tBest;    /* Best solution in the current population */
+    int fCurNumOfGen;         /* The current number of generations */
+    long int fAccumurateNumCh; /* The accumulated number of offspring solutions */
 
-	int fBestNumOfGen;					// 当前最优解所在的代数                     
-	long int fBestAccumeratedNumCh;		// 当前最优解的子代累计数目        
-	int **fEdgeFreq;					// 种群的边频率
-	double fAverageValue;				// 种群TSP路径的平均长度                  
-	int fBestValue;						// 种群最优解的路径长度                        
-	int fBestIndex;						// 最优种群的下标
+    int fBestNumOfGen;             /* The number of generations at which the current best solution was found */
+    long int fBestAccumeratedNumCh; /* The accumulated number of offspring solutions at which the current best solution was found */
+    int **fEdgeFreq;                /* The frequency of the edges of the population */
+    double fAverageValue;           /* The average tour lengths of the population */
+    int fBestValue;                 /* The tour lenght of the best tour in the population */
+    int fBestIndex;                 /* Index of the best population member */
 
-	int* fIndexForMating;				// 交叉列表(r[])
-	int fStagBest;						// 子代最优解没有提升的累计代数                         
-	int fFlagC[ 10 ];					// EAX方式与选择策略                      
-	int fStage;							// 当前阶段
-	int fMaxStagBest;					// fStagBest==fMaxStagBest时执行下一阶段                      
-	int fCurNumOfGen1;					// Stage I结束时的种群代数                     
+    int *fIndexForMating; /* Mating list (r[] in the paper) */
+    int fStagBest;        /* The number of generations during which no improvement is found in the best tour */
+    int fFlagC[10];       /* Specify configurations of EAX and selection strategy */
+    int fStage;           /* Current stage */
+    int fMaxStagBest;     /* If fStagBest = fMaxStagBest, proceed to the next stage */
+    int fCurNumOfGen1;    /* Number of generations at which Stage I is terminated */
 
-	clock_t fTimeStart, fTimeInit, fTimeEnd;	// 保存计算时间
+    clock_t fTimeStart, fTimeInit, fTimeEnd; /* Use them to measure the execution time */
 };
 
 #endif

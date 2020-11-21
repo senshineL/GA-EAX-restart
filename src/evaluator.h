@@ -1,10 +1,3 @@
-/*
- * evaluator.h
- *   created on: April 24, 2013
- * last updated: June 13, 2013
- *       author: liushujia
- */
-
 #ifndef __EVALUATOR__
 #define __EVALUATOR__
 
@@ -15,22 +8,24 @@
 #include <string.h>
 #include <assert.h>
 
-class TEvaluator{
+class TEvaluator
+{
 public:
-	TEvaluator();
-	~TEvaluator();
-	void setInstance( char filename[] );		// 设置变量
-	void doIt( TIndi& indi );					// 设置indi.fEvaluationValue
-	void writeTo( FILE* fp, TIndi& indi );		// 输出TSP路径
-	bool checkValid( int* array, int value );	// 检查TSP路径合法性 
+    TEvaluator();
+    ~TEvaluator();
+    void setInstance(char filename[]);/* Set the instance */
+    void doIt(TIndi &indi);           /* Set the value of indi.fEvaluationValue */
+    void writeTo(FILE *fp, TIndi &indi);     /* Write an tour to a file*/
+    void writeToStdout( TIndi& indi ); /* Write a tour to stdout */
+    bool checkValid(int *array, int value);  /* Check an tour */
 
-	int fNearNumMax;	// 近邻点数目的最大值
-	int **fNearCity;	// NearCity[i][k]表示距离i最近的第k个城市
-	int **fEdgeDis;		// EdgeDis[i][j]表示城市i到j的距离
-	int Ncity;			// 城市数目
-	double *x;			// x[i]表示第i个城市的x坐标
-	double *y;			// y[i]表示第i个城市的y坐标
-	int *Array;			// 最优解的节点标号
+    int fNearNumMax; /* Maximum number of k (see below) */
+    int **fNearCity; /* NearCity[i][k]: k-th nearest city from */
+    int **fEdgeDis;  /* EdgeDis[i][j]: distance between i and j */
+    int Ncity;       /* Number of cities */
+    double *x;       /* x[i]: x-coordinate of */
+    double *y;       /* y[i]: x-coordinate of */
+    int *Array;
 };
 
 #endif

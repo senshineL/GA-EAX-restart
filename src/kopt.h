@@ -1,10 +1,3 @@
-/*
- * kopt.h
- *   created on: April 24, 2013
- * last updated: June 13, 2013
- *       author: liushujia
- */
-
 #ifndef __KOPT__
 #define __KOPT__
 
@@ -30,52 +23,52 @@
 
 class TKopt{
 public:
-	TKopt( int N );
-	~TKopt();
-	void setInvNearList();
-	void transIndiToTree( TIndi& indi );
-	void transTreeToIndi( TIndi& indi );
-	void doIt( TIndi& tIndi );			// 局部搜索(2-opt neighborhood)
-  
-	int getNext( int t );
-	int getPrev( int t );
-	int turn( int &orient );
+    TKopt( int N );
+    ~TKopt();
+    void setInvNearList();
+    void transIndiToTree( TIndi& indi );
+    void transTreeToIndi( TIndi& indi );
+    void doIt(TIndi &tIndi); /* Apply a local search with the 2-opt neighborhood */
 
-	void sub();
-	void incrementImp( int flagRev );
-	void combineSeg( int segL, int segS );
+    int getNext( int t );
+    int getPrev( int t );
+    int turn( int &orient );
 
-	void checkDetail();
-	void checkValid();
-	void swap(int &x, int &y);
-	void makeRandSol( TIndi& indi );		// 设置随机路程
+    void sub();
+    void incrementImp( int flagRev );
+    void combineSeg( int segL, int segS );
 
-	TEvaluator* eval;
+    void checkDetail();
+    void checkValid();
+    void swap(int &x, int &y);
+    void makeRandSol(TIndi &indi); /* Set a random tour */
+
+    TEvaluator* eval;
 
 private:
-	int fN;
-	int fFixNumOfSeg;
-	int fNumOfSeg;
-	int fFlagRev;
-	int fTourLength;
+    int fN;
+    int fFixNumOfSeg;
+    int fNumOfSeg;
+    int fFlagRev;
+    int fTourLength;
 
-	int **fLink;
-	int **fLinkSeg;
-	int **fCitySeg;
-	int **fInvNearList;
+    int **fLink;
+    int **fLinkSeg;
+    int **fCitySeg;
+    int **fInvNearList;
 
-	int *fT;
-	int *fB;
-	int *fSegCity;
-	int *fOrdCity;
-	int *fOrdSeg;
-	int *fOrient;
-	int *fSizeSeg;
-	int *fActiveV;
-	int *fNumOfINL;
-	int *fArray;
-	int *fCheckN;
-	int *fGene;
+    int *fT;
+    int *fB;
+    int *fSegCity;
+    int *fOrdCity;
+    int *fOrdSeg;
+    int *fOrient;
+    int *fSizeSeg;
+    int *fActiveV;
+    int *fNumOfINL;
+    int *fArray;
+    int *fCheckN;
+    int *fGene;
 };
 
 #endif

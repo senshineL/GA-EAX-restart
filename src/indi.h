@@ -1,10 +1,3 @@
-/*
- * indi.h
- *   created on: April 24, 2013
- * last updated: June 13, 2013
- *       author: liushujia
- */
-
 #ifndef __INDI__
 #define __INDI__
 
@@ -13,17 +6,18 @@
 #include <stdlib.h>
 #include <assert.h>
 
-class TIndi{
+class TIndi
+{
 public:
-	TIndi();
-	~TIndi();
-	void define( int N );
-	TIndi& operator = ( const TIndi& src );
-	bool operator == (  const TIndi& indi2 );	// 判断两路径是否相同 
+    TIndi();
+    ~TIndi();
+    void define( int N );
+    TIndi &operator=(const TIndi &src);      /* Copy */
+    bool operator==(const TIndi &indi2);     /* Return true if two tours are the same, false otherwise */
 
-	int fN;						// 城市数目
-	int** fLink;				// fLink[i][]表示路径中i的两个相邻的城市
-	int fEvaluationValue;		// TSP路径长度
+    int fN;     /* Number of cities */
+    int **fLink;         /* fLink[i][]: two vertices adjacent to i */
+    int fEvaluationValue; /* Tour length of */
 };
 
 #endif
